@@ -19,7 +19,7 @@
     return sharedInstance;
 }
 
-- (void)getWeatherWithName:(NSString *)name completion:(void (^)(NSArray *weather))completion {
+- (void)getWeatherWithName:(NSString *)name completion:(void (^)(WeatherObject *weather))completion {
     
     NSString *path = [NSString stringWithFormat:@"weather?q=%@", name];
     NSLog(@"name is=%@",name);
@@ -28,14 +28,9 @@
         
         NSDictionary *responseWeather = responseObject;
         
-        NSMutableArray *weatherArray = [NSMutableArray new];
-        
-        for (NSDictionary *dictionary in responseWeather) {
-            WeatherObject *weather = [[WeatherObject alloc] initWithDictionary:dictionary];
-            [weatherArray addObject:weather];
-        }
-        
-        completion(weatherArray);
+        WeatherObject *weather = [[WeatherObject alloc] initWithDictionary:responseWeather];
+                
+        completion(weather);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"ERROR: %@", error);
         completion(nil);

@@ -13,7 +13,7 @@
 @interface ObjectController : NSObject
 
 + (ObjectController *)sharedInstance;
-- (void)getWeatherWithName:(NSString *)name completion:(void (^)(NSArray * weather))completion;
+- (void)getWeatherWithName:(NSString *)name completion:(void (^)(WeatherObject * weather))completion;
 
 
 @end

@@ -9,34 +9,22 @@
 #import "WeatherObject.h"
 #import "NetworkController.h"
 
-static NSString * const locationNameKey = @"locationName";
-static NSString * const weatherMainKey = @"weather";
-static NSString * const mainKey = @"main";
-static NSString * const weatherDescriptionKey = @"weatherDescription";
-static NSString * const weatherTempKey = @"weatherTemp";
-static NSString * const iconKey = @"icon";
-
-
-
 @implementation WeatherObject
 
 -(id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        self.weatherMain = [dictionary valueForKeyPath:@"weather.main"];
-//        dictionary[weatherMainKey.main];
-//        self.weatherDescription = dictionary[weatherDescriptionKey];
-//        self.weatherTemp = dictionary[weatherTempKey];
-//        self.locationName = dictionary[locationNameKey];
-//        self.weatherIcon = dictionary[iconKey];
-//        NSLog(@"location name %@", self.locationName);
-//         NSLog(@"location name %@", self.locationName);
+        NSArray *mainArray = dictionary[@"weather"];
+        NSDictionary *mainDictionary = mainArray.firstObject;
+        self.weatherMain = mainDictionary[@"main"];
+        self.weatherDescription = mainDictionary[@"description"];
+        self.weatherTemp = dictionary[@"main"][@"temp"];
+        self.locationName = dictionary[@"name"];
+        self.weatherIcon = mainDictionary[@"icon"];
     }
     
     return self;
 }
-
-
 
 
 @end

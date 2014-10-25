@@ -37,8 +37,7 @@
 - (IBAction)searchButtonPressed:(UIButton *)sender {
     NSString *query = self.searchTextField.text;
     [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [[ObjectController sharedInstance] getWeatherWithName:query completion:^(NSArray *weatherArray) {
-        WeatherObject *weatherObject = weatherArray.firstObject;
+    [[ObjectController sharedInstance] getWeatherWithName:query completion:^(WeatherObject *weatherObject) {
         self.locationNameLabel.text = weatherObject.locationName;
         self.weatherMainLabel.text = weatherObject.weatherMain;
         self.weatherDescriptionLabel.text = weatherObject.weatherDescription;
